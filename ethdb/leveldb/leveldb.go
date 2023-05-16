@@ -153,10 +153,11 @@ func NewCustom(file string, namespace string, customize func(options *opt.Option
 func configureOptions(customizeFn func(*opt.Options)) *opt.Options {
 	// Set default options
 	options := &opt.Options{
-		Filter:                 filter.NewBloomFilter(10),
-		DisableSeeksCompaction: true,
-		WriteL0PauseTrigger:    24,
-		WriteL0SlowdownTrigger: 16,
+		Filter:                      filter.NewBloomFilter(10),
+		DisableSeeksCompaction:      true,
+		CompactionExpandLimitFactor: 32,
+		WriteL0PauseTrigger:         32,
+		WriteL0SlowdownTrigger:      16,
 	}
 	// Allow caller to make custom modifications to the options
 	if customizeFn != nil {
